@@ -1,0 +1,51 @@
+h2 {
+  width: 100%;
+}
+
+.drag-n-drop {
+  display: flex;
+  gap: .5rem;
+  width: 50%; 
+  height: 50%;
+  z-index: 50;
+}
+
+.dnd-group {
+  background-color: var(--base);
+  border: solid 1px var(--border);
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px;
+  filter: drop-shadow(0 0 1.4mm var(--shadow));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 200px;
+}
+
+.dnd-item {
+  color: var(--text);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  opacity: 75%;
+
+  margin: 2px 4px;
+  padding: 8px 6px;
+}
+
+.dnd-item:hover {
+  opacity: 100%;
+  margin: 2px 2px;
+  padding: 8px 8px;
+}
+
+.current {
+  background-color: white;
+}
+
+.group-title {
+  text-align: left;
+  margin-bottom: .5rem;
+  color: white;
+}

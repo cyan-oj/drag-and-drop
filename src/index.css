@@ -1,0 +1,55 @@
+:root {
+  --base: rgba(255, 255, 255, .70);
+  --border: rgb(255, 255, 255);
+  --button-active: rgb( 255, 255, 255 );
+  --text: rgb(15, 15, 15);
+  --shadow: rgba(0, 0, 0, .4);
+
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 500;
+
+  color-scheme: light dark;
+  color: var(--text);
+  background-color: var(--base);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--base);
+  border: solid 1px var(--border);
+  cursor: pointer;
+  margin: .1em .4em;
+}
+button:hover {
+  z-index: 50;
+  margin: -.1em .2em;
+  background-color: var(--button-active);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --base: rgba(0, 0, 0, .4);
+    --border: rgb(0, 0, 0);
+    --button-active: rgb( 0, 0, 0 );
+    --text: rgb(200, 200, 200);
+    --grid-light: rgb(75, 75, 75);
+    --grid-dark: rgb(40, 40, 40);
+  }
+}
