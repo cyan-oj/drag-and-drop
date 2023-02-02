@@ -16,7 +16,6 @@ function SortableList( { data }) {
   }
 
   const dragStart = ( e, index ) => {
-    // console.log("start drag", index )
     dragItem.current = index
     dragNode.current = e.target
     dragNode.current.addEventListener("dragend", dragEnd)
@@ -26,7 +25,6 @@ function SortableList( { data }) {
   }
 
   const dragEnd = () => {
-    // console.log("end drag")
     setDragging(false)
     dragNode.current.removeEventListener("dragEnd", dragEnd)
     dragItem.current = null;
@@ -38,7 +36,6 @@ function SortableList( { data }) {
     const currentItem = dragItem.current;
 
     if ( dragNode.current !== e.target ) {
-
       console.log('current item', currentItem)
 
       setList ( oldList => {

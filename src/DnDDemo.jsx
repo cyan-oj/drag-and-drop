@@ -23,9 +23,9 @@ function DnDDemo() {
   const dragItem = useRef();
   const dragNode = useRef();
 
-  const dragStart = ( e, group_i, item_i ) => {
-    console.log('drag start', group_i, item_i)
-    dragItem.current = { group_i: group_i, item_i: item_i }
+  const dragStart = ( e, group, item ) => {
+    console.log('drag start', group, item)
+    dragItem.current = { group: group, item: item }
     dragNode.current = e.target
     dragNode.current.addEventListener('dragend', dragEnd)
     setTimeout(() => { // prevents modified styling from applying to drag element
@@ -41,18 +41,17 @@ function DnDDemo() {
     dragNode.current = null;
   }
 
-  const dragEnter = ( e, group_i, item_i ) => {
-    console.log('drag enter', group_i, item_i)
+  const dragEnter = ( e, group, item ) => {
+    console.log('drag enter', group, item)
     const currentItem = dragItem.current;
     if (dragNode.current !== e.target) {
       console.log('current item', currentItem)
       setColors( oldlist => {
         let newList = JSON.parse(JSON.stringify(oldlist));
-          const something =  newList[currentItem.group_i].colors.splice(currentItem.item_i, 1)[0]
+          const something =  newList[currentItem.group].colors.splice(currentItem.item, 1)[0]
           console.log('something', something)
-
-          newList[group_i].colors.splice(item_i, 0, something)
-          dragItem.current = { group_i: group_i, item_i: item_i }
+          newList[group].colors.splice(item, 0, something)
+          dragItem.current = { group: group, item: item }
         return newList
       })
     }
@@ -60,20 +59,20 @@ function DnDDemo() {
 
   const getStyles = (group, item) => {
     const currentItem = dragItem.current;
-    if (currentItem.group_i === group && currentItem.item_i === item) return 'current dnd-item';
+    if (currentItem.group === group && currentItem.item === item) return 'current dnd-item';
     return 'dnd-item';
   }
 
-  const colorGroups = colors.map((colorGroup, group_i) => 
-    <div className="dnd-group" key={ colorGroup.title } onDragEnter={ dragging && !colorGroup.colors.length ? e => dragEnter( e, { group_i, item_i: 0 }) : null }>
+  const colorGroups = colors.map((colorGroup, group) => 
+    <div className="dnd-group" key={ colorGroup.title } onDragEnter={ dragging && !colorGroup.colors.length ? e => dragEnter( e, group, 0 ) : null }>
       <h2 className="group-title">{ colorGroup.title }</h2>
       {
-        colorGroup.colors.map(( color, item_i ) =>
-          <button key={ item_i } style={{ backgroundColor: color }} 
-            className={ dragging ? getStyles( group_i, item_i ) : "dnd-item" } 
+        colorGroup.colors.map(( color, item ) =>
+          <button key={ item } style={{ backgroundColor: color }} 
+            className={ dragging ? getStyles( group, item ) : "dnd-item" } 
             draggable
-            onDragStart={ e => dragStart( e, group_i, item_i )}
-            onDragEnter={ dragging ? e => dragEnter( e, group_i, item_i) : null }
+            onDragStart={ e => dragStart( e, group, item )}
+            onDragEnter={ dragging ? e => dragEnter( e, group, item) : null }
           >{ color }</button>
         )
       }
